@@ -61,6 +61,12 @@ const AUTH_RESPONSES = {
   },
 
   // Internal server errors
+  FILE_MISSING: {
+    errorCode: 1,
+    errorType: ERROR_TYPES.INTERNAL_SERVER_ERROR,
+    message: 'Vui lòng cung cấp ảnh khuôn mặt.',
+  },
+
   LOGIN_ERROR: {
     errorCode: 1,
     errorType: ERROR_TYPES.INTERNAL_SERVER_ERROR,

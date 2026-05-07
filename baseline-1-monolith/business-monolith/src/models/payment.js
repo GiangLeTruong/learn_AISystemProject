@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     class Payment extends Model {
         static associate(models) {
             Payment.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+            Payment.belongsTo(models.Order, { foreignKey: 'orderId', as: 'order' });
         }
     }
     Payment.init({

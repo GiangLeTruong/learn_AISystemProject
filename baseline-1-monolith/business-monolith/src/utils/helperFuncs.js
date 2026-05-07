@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 const models = require('../models');
 const { ERROR_RESPONSES } = require('../constants/apiError');
-const { PROJECT_STATUS, PROJECT_RESPONSES } = require('../constants/projectResponse');
-const { OFFICE_COST_RESPONSES } = require('../constants/officeCostResponse');
 
 require('dotenv').config();
 const util = {};

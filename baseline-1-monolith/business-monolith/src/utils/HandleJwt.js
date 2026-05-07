@@ -8,7 +8,7 @@ if (!ACCESS_TOKEN_KEY) {
   throw new Error('SERVER_TOKEN_KEY is not defined in .env');
 }
 
-function signAccessToken(payload, expiresIn = '60m') {
+function signAccessToken(payload, expiresIn = '900m') {
   return jwt.sign(payload, ACCESS_TOKEN_KEY, { expiresIn });
 }
 
