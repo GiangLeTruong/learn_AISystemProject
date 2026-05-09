@@ -1,2 +1,4 @@
+- Cài thư viện:
+python -m pipreqs.pipreqs . --force
 - Chạy server:
 python -m uvicorn main:app --host 0.0.0.0 --port 5101 --reload

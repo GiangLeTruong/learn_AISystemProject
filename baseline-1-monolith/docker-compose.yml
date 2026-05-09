@@ -1,0 +1,60 @@
+services:
+  # ----------------------------------------
+  # 1. KHỐI NGHIỆP VỤ (Node.js)
+  # ----------------------------------------
+  business-monolith:
+    build:
+      context: ./business-monolith
+      dockerfile: Dockerfile
+    container_name: baseline1_business_monolith
+    ports:
+      - "5100:5100"
+    env_file:
+      - .env
+    depends_on:
+      - ai-face-service
+      - ai-recommend-service
+    deploy:
+      resources:
+        limits:
+          # Node.js xử lý logic I/O khá nhẹ, nên chia 1.3 CPU và 2.5GB RAM là dư sức
+          cpus: '1.3'
+          memory: 2.5G
+
+  # ----------------------------------------
+  # 2. KHỐI AI NHẬN DIỆN KHUÔN MẶT (Python)
+  # ----------------------------------------
+  ai-face-service:
+    build:
+      context: ./ai-face-service
+      dockerfile: Dockerfile
+    container_name: baseline1_ai_face
+    ports:
+      - "5101:5101"
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          # Mô hình ArcFace/MobileNetV2 xử lý ảnh nên cần nhiều tài nguyên nhất
+          cpus: '1.7'
+          memory: 3.5G
+
+  # ----------------------------------------
+  # 3. KHỐI AI GỢI Ý SẢN PHẨM (Python)
+  # ----------------------------------------
+  ai-recommend-service:
+    build:
+      context: ./ai-recommendation-service
+      dockerfile: Dockerfile
+    container_name: baseline1_ai_recommend
+    ports:
+      - "5102:5102"
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          # Thư viện Surprise tính toán ma trận cần nhiều RAM để lưu bảng Rating
+          cpus: '1.0'
+          memory: 2G
