@@ -3,24 +3,15 @@ Dự án phát triển hệ thống nhận diện khuôn mặt sử dụng Deep 
 Tài liệu này quy định các chuẩn mực coding (Coding Conventions) bắt buộc cho toàn bộ thành viên dự án.
 
 # 1. Cấu trúc Dự án
-Baseline 1: Monolith + REST API
-Baseline 2: Microservices + REST API
-Baseline 3 (Main): Microservices + gRPC
+Baseline 1: Monolith + REST API             *port: 5100 localhost:5100
+Baseline 2: Microservices + REST API        *port: 6100 - localhost:6100/api
+Baseline 3 (Main): Microservices + gRPC     *port: 7100 - localhost:7100/api
 
 # 2. Quy ước Đặt tên
 **- Biến và Hàm (camelCase)**
 Đặt tên theo phong cách camelCase. _VD: userName, firstName, getNewItems_
 Biến: Phải mang ý nghĩa rõ ràng. Tránh đặt tên biến đơn (a, b, x) trừ khi là công thức toán học phổ quát hoặc biến chạy trong loop.
 Hàm: Bắt đầu bằng động từ.
-
-**- Class (Pascal Case)**
-_VD: class FaceNetMobile(nn.Module): ...
-class CustomDataset(Dataset): ..._
-
-**- Hằng số (Upper Case)**
-_VD: BATCH_SIZE = 32
-LEARNING_RATE = 1e-4
-INPUT_SHAPE = (112, 112)_
 
 **- Quy ước đặc thù Deep Learning**
 X: Dữ liệu đầu vào (Features/Images).
