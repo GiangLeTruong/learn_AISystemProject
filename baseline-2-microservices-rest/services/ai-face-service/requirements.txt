@@ -1,9 +1,9 @@
-torch
-torchvision
-facenet-pytorch
-opencv-python-headless
-Pillow
-numpy
-fastapi
-uvicorn
+facenet_pytorch==2.5.3
+fastapi==0.136.1
+numpy<2.3.0
+opencv_python==4.12.0.88
+Pillow==12.2.0
+torch==2.9.1
+torchvision==0.24.1
 python-multipart
+uvicorn

@@ -1,0 +1,90 @@
+services:
+  # ----------------------------------------
+  # 1. API GATEWAY (Nhẹ nhất, chỉ làm nhiệm vụ điều phối đường dẫn)
+  # ----------------------------------------
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+    container_name: baseline2_api_gateway
+    ports:
+      - "6100:6100" # Chỉ cần mở Port của Gateway ra cho Client/Postman gọi
+    env_file:
+      - .env
+    depends_on:
+      - user-service
+      - shopping-service
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 512M
+
+  # ----------------------------------------
+  # 2. USER SERVICE (Node.js - Xử lý Login, DB)
+  # ----------------------------------------
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: baseline2_user_service
+    # Chú ý: Không cần mở ports ra ngoài (Host), chỉ dùng mạng nội bộ Docker
+    env_file:
+      - .env
+    depends_on:
+      - ai-face-service
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+
+  # ----------------------------------------
+  # 3. SHOPPING SERVICE (Node.js - Xử lý Sản phẩm, Cart)
+  # ----------------------------------------
+  shopping-service:
+    build:
+      context: ./services/shopping-service
+      dockerfile: Dockerfile
+    container_name: baseline2_shopping_service
+    env_file:
+      - .env
+    depends_on:
+      - ai-recommend-service
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+
+  # ----------------------------------------
+  # 4. AI FACE SERVICE (Python - Nặng nhất)
+  # ----------------------------------------
+  ai-face-service:
+    build:
+      context: ./services/ai-face-service
+      dockerfile: Dockerfile
+    container_name: baseline2_ai_face
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '1.7'
+          memory: 3.5G
+
+  # ----------------------------------------
+  # 5. AI RECOMMENDATION SERVICE (Python)
+  # ----------------------------------------
+  ai-recommend-service:
+    build:
+      context: ./services/ai-recommendation-service
+      dockerfile: Dockerfile
+    container_name: baseline2_ai_recommend
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G

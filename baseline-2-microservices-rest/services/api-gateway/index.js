@@ -21,8 +21,8 @@ app.use(authMiddleware);
 // 2. Danh sách định tuyến (Routing Table)
 // Lưu ý: Khi chạy Docker, 'target' sẽ là tên Service trong file docker-compose
 const routes = {
-    '/api/auth': 'http://localhost:6101', //user-service
-    '/api/': 'http://localhost:6102', //shopping-service
+    '/api/auth': `${process.env.USER_SERVICE_URL}`, //user-service http://localhost:6101
+    '/api/': `${process.env.SHOPPING_SERVICE_URL}`, //shopping-service http://localhost:6102
 };
 // 3. Thiết lập Proxy cho từng route
 Object.entries(routes).forEach(([path, target]) => {

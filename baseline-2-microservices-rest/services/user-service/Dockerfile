@@ -10,6 +10,6 @@ COPY . .
 
 ENV NODE_ENV=production
 
-EXPOSE 6102
+EXPOSE 6101
 
 CMD ["node", "app.js"]
