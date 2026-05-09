@@ -1,16 +1,33 @@
 - Baseline-1 Organization
-
+baseline-1-monolith/
+├──ai-face-service/			# Port: 5101
+│   ├── main.py              
+│   ├── requirements.txt
+│   ├── model.py, .pth...
+│   └── Dockerfile           
+├──ai-recommendation-service/		# Port: 5102
+│   ├── main.py              
+│   ├── requirements.txt
+│   └── Dockerfile
+├──business-monolith			# Port: 5100
+│   ├── package.json
+│   ├── index.js / app.js   
+│   └── Dockerfile
+├── .env                     
+└── docker-compose.yml
+Tổng tài nguyên
+CPU: 1.3 + 1.7 + 1.0 = 4.0 Cores
+RAM: 2.5G + 3.5G + 2.0G = 8.0 GB
 
 - Baseline-2 Organization
 baseline-2-microservices-rest/
 ├── services/
-│   ├── api-gateway/            # Cổng đón tiếp (Nginx hoặc Node.js Gateway)
-│   ├── user-service/           # Port: 6101
-│   ├── shopping-service/       # Port: 6102
-│   ├── management-service/     # Port: 6103
-│   ├── ai-face-service/        # Port: 6104 (Python)
-│   └── ai-recommend-service/   # Port: 6105 (Python)
-├── docker-compose.yml          # "Dây thừng" buộc 6 cái container lại với nhau
-└── .env                        # Chứa các biến môi trường chung
+│   ├── api-gateway/            		# Port: 6100
+│   ├── user-service/           		# Port: 6101
+│   ├── shopping-service/       		# Port: 6102
+│   ├── ai-face-service/        		# Port: 6104 (Python)
+│   └── ai-recommendation-service/   	# Port: 6105 (Python)
+├── docker-compose.yml          
+└── .env                        
 
 - Baseline-3 Organization
