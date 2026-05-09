@@ -1,3 +1,7 @@
+- Baseline-1 Organization
+
+
+- Baseline-2 Organization
 baseline-2-microservices-rest/
 ├── services/
 │   ├── api-gateway/            # Cổng đón tiếp (Nginx hoặc Node.js Gateway)
@@ -8,3 +12,5 @@ baseline-2-microservices-rest/
 │   └── ai-recommend-service/   # Port: 6105 (Python)
 ├── docker-compose.yml          # "Dây thừng" buộc 6 cái container lại với nhau
 └── .env                        # Chứa các biến môi trường chung
+
+- Baseline-3 Organization

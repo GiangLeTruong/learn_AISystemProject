@@ -3,9 +3,25 @@ Dự án phát triển hệ thống nhận diện khuôn mặt sử dụng Deep 
 Tài liệu này quy định các chuẩn mực coding (Coding Conventions) bắt buộc cho toàn bộ thành viên dự án.
 
 # 1. Cấu trúc Dự án
+**- Phân chia host**
 Baseline 1: Monolith + REST API             *port: 5100 localhost:5100
 Baseline 2: Microservices + REST API        *port: 6100 - localhost:6100/api
 Baseline 3 (Main): Microservices + gRPC     *port: 7100 - localhost:7100/api
+
+**- Phân chia tài nguyên**
+Baseline 1 (Monolithic): 1 Container chứa toàn bộ: cpus: '4.0', memory: 8G
+Baseline 2 & 3 (Microservices):
+    api-gateway (Node.js - Rất nhẹ): cpus: '0.3', memory: 512M
+
+    user-service (Node.js - Vừa): cpus: '0.5', memory: 1G
+
+    shopping-service (Node.js - Vừa): cpus: '0.5', memory: 1G
+
+    ai-face-service (Python PyTorch - Nặng CPU/RAM): cpus: '1.7', memory: 3.5G
+
+    ai-recommend-service (Python - Nặng RAM khi lưu Matrix): cpus: '1.0', memory: 2G
+
+    => Tổng cộng: Đúng 4.0 CPU và 8GB RAM.
 
 # 2. Quy ước Đặt tên
 **- Biến và Hàm (camelCase)**
