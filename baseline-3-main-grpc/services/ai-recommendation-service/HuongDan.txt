@@ -1,0 +1,4 @@
+- Generate protos:
+python -m grpc_tools.protoc -I../../protos --python_out=./generated_protos --grpc_python_out=./generated_protos ../../protos/recommend_service.proto
+- Run server:
+python server.py

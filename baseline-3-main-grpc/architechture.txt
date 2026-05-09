@@ -1,0 +1,10 @@
+baseline-2-microservices-rest/
+├── services/
+│   ├── api-gateway/            # Cổng đón tiếp (Nginx hoặc Node.js Gateway)
+│   ├── user-service/           # Port: 6101
+│   ├── shopping-service/       # Port: 6102
+│   ├── management-service/     # Port: 6103
+│   ├── ai-face-service/        # Port: 6104 (Python)
+│   └── ai-recommend-service/   # Port: 6105 (Python)
+├── docker-compose.yml          # "Dây thừng" buộc 6 cái container lại với nhau
+└── .env                        # Chứa các biến môi trường chung

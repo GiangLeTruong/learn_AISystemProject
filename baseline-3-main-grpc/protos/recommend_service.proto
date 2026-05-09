@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package recommend_system;
+
+// ĐỊNH NGHĨA DỊCH VỤ
+service AiRecommendService {
+  rpc TrainModel (TrainRequest) returns (TrainResponse) {}
+  rpc PredictRecommendation (PredictRequest) returns (PredictResponse) {}
+}
+
+// ==========================================
+// ĐỊNH NGHĨA CHO HÀM TRAIN
+// ==========================================
+
+// Tạo một cấu trúc con đại diện cho 1 dòng dữ liệu huấn luyện
+message Interaction {
+  int32 user_id = 1;
+  int32 product_id = 2;
+  float rating = 3;
+}
+
+message TrainRequest {
+  // Từ khóa 'repeated' tương đương với một Array trong mảng JSON của bạn
+  repeated Interaction data = 1; 
+}
+
+message TrainResponse {
+  bool success = 1;
+  string message = 2;
+  string details = 3; // (Tùy chọn) Chứa chuỗi string báo cáo kết quả train từ Python
+}
+
+// ==========================================
+// ĐỊNH NGHĨA CHO HÀM PREDICT
+// ==========================================
+
+message PredictRequest {
+  int32 user_id = 1;
+  int32 top_n = 2;
+}
+
+message PredictResponse {
+  bool success = 1;
+  string message = 2;
+  // Trả về thẳng một mảng các ID sản phẩm (số nguyên)
+  repeated int32 recommended_product_ids = 3; 
+}

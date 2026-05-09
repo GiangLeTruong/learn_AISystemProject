@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package face_recognition;
+
+service AiFaceService {
+  // Hàm chính dùng để xác thực khuôn mặt
+  rpc VerifyFace (FaceVerifyRequest) returns (FaceVerifyResponse) {}
+}
+
+message FaceVerifyRequest {
+  // Dùng kiểu 'bytes' để truyền thẳng RAM buffer từ Node.js sang Python
+  bytes image_data = 1; 
+  string filename = 2;
+  string mimetype = 3;
+}
+
+message FaceVerifyResponse {
+  bool success = 1;
+  string message = 2;
+  
+  message FaceData {
+    string status = 1;     // Trả về "MATCHED" hoặc "UNRECOGNIZED"
+    string user_id = 2;    // Trả về email của user nếu MATCHED
+    float confidence = 3;  // (Tùy chọn) Độ chính xác
+  }
+  
+  FaceData data = 3;
+}
